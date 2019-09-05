@@ -22,7 +22,6 @@ export class UploadComponent {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       this.uploadStatus.emit({ status: ProgressStatusEnum.START });
-      debugger;
       this.service.uploadFile(file).subscribe(
         data => {
           if (data) {
