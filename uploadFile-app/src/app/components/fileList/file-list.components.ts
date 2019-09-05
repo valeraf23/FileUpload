@@ -15,9 +15,7 @@ export class FileListComponent implements OnInit{
   constructor(private service: FileUploadService, private fileGetService: FileGetService) { }
 
   ngOnInit() {
-    debugger
     this.fileGetService.getFiles$.subscribe(() => {
-        debugger;
         this.getFiles();
       }
     );
@@ -27,7 +25,6 @@ export class FileListComponent implements OnInit{
   public getFiles() {
     this.service.getFiles().subscribe(
       data => {
-        debugger;
         this.files = data;
       }
     );
