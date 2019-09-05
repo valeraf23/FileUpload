@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
-using UploadFile.Domain.Models;
+using UploadFile.Data.Services;
 using UploadFile.Extensions;
 
 namespace UploadFile.Controllers
@@ -14,52 +11,29 @@ namespace UploadFile.Controllers
     [ApiController]
     public class UploadFileController : ControllerBase
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly IFileProvider _fileProvider;
-        public UploadFileController(IHostingEnvironment environment, IFileProvider fileProvider)
+        private readonly IFileService _fileService;
+
+        public UploadFileController(IFileService fileService)
         {
-            _hostingEnvironment = environment;
-            _fileProvider = fileProvider;
-    }
+
+            _fileService = fileService
+                           ?? throw new ArgumentNullException(nameof(fileService));
+            _fileService = fileService;
+        }
 
         [HttpPost]
         [Route("upload")]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public async Task<IActionResult> Upload(IFormFile uploadedFile)
         {
-            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-            if (!Directory.Exists(uploads))
-            {
-                Directory.CreateDirectory(uploads);
-            }
-
-            if (file.Length > 0)
-            {
-                var filePath = Path.Combine(uploads, file.FileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(fileStream);
-                }
-            }
-
+            var file = uploadedFile.ConvertToFileInfoModel();
+            await _fileService.AddAsync(file);
             return Ok();
         }
 
         [HttpGet]
-        public IActionResult Files()
+        public async Task<IActionResult> Files()
         {
-            var result = new List<FileInfoModel>();
-
-            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-            if (Directory.Exists(uploads))
-            {
-                foreach (var fileInfo in _fileProvider.GetDirectoryContents("wwwroot/uploads"))
-                {
-                    var fileInfoModel = fileInfo.ConvertToFileInfoModel();
-                    result.Add(fileInfoModel);
-                }
-
-            }
-
+            var result = await _fileService.GetFilesAsync();
             return Ok(result);
 
         }

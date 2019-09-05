@@ -10,7 +10,13 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using UploadFile.Data.ValidationRules;
 using UploadFile.Filters;
+using FluentValidation.AspNetCore;
+using UploadFile.Data.Data;
+using UploadFile.Data.Repository;
+using Microsoft.EntityFrameworkCore;
+using UploadFile.Data.Services;
 
 namespace UploadFile
 {
@@ -26,6 +32,9 @@ namespace UploadFile
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FileUploadContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Local")));
+
             services.AddCors();
             services.AddMvc(
                     opt => { opt.Filters.Add(typeof(ValidatorActionFilter)); })
@@ -36,10 +45,9 @@ namespace UploadFile
                     options.SerializerSettings.Formatting = Formatting.Indented;
                     options.SerializerSettings.ContractResolver =
                         new CamelCasePropertyNamesContractResolver();
-                });
-
-            IFileProvider physicalProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
-            services.AddSingleton<IFileProvider>(physicalProvider);
+                }).AddFluentValidation(fv => { fv.RegisterValidatorsFromAssemblyContaining<FilelModelValidator>(); });
+            services.AddScoped<IRepository, FileRepository>();
+            services.AddScoped<IFileService, FileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,10 +79,7 @@ namespace UploadFile
                 });
             }
 
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-            });
+            app.UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
             app.UseHttpsRedirection();
             app.UseMvc();
         }

@@ -2,7 +2,7 @@
 
 namespace UploadFile.Domain.Models
 {
-    public class FileInfoModel
+    public class FileInfoModel: IModel
     {
         public string Name { get; set; }
         public long Size { get; set; }
