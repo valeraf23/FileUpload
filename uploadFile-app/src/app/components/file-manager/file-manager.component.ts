@@ -13,13 +13,29 @@ export class FileManagerComponent implements OnInit{
 
   ngOnInit(): void { this.getFiles(); }
 
-  public files: FileModel[];
+  private files: FileModel[];
   public percentage: number;
   public showProgress: boolean;
   public showUploadError: boolean;
   public message: string;
+  private _filter: string;
+  public filteredFiles: FileModel[];
+
+  public get filter(): string {
+    return this._filter;
+  }
+
+  public set filter(value: string) {
+    this._filter = value;
+    this.filteredFiles = this.filter ? this.performFilter(this.filter) : this.files;
+  }
 
   constructor(private fileUploadService: FileUploadService) {}
+
+  private performFilter(filterBy: string): FileModel[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.files.filter((g: FileModel) => g.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
 
   public uploadStatus(event: ProgressStatus):void {
     switch (event.status) {
@@ -47,6 +63,7 @@ export class FileManagerComponent implements OnInit{
     this.fileUploadService.getFiles().subscribe(
       data => {
         this.files = data;
+        this.filteredFiles = data;
       }
     );
   }

@@ -1,4 +1,10 @@
 <app-upload [disabled]="showProgress" (uploadStatus)="uploadStatus($event)"></app-upload>
+
+<div class='col-md-2'>Filter by:</div>
+<div class='col-md-2'>
+<input class="filter" type='text' class="form-control" aria-label="Default"
+           [(ngModel)]='filter' />
+  </div>
 <h2>File List</h2>
 <span *ngIf="showProgress" class="upload">
   {{percentage}}%
@@ -7,4 +13,4 @@
   {{message}}
 </span>
 <hr>
-<file-list [fileModels]="files"></file-list>
+<file-list [fileModels]="filteredFiles"></file-list>

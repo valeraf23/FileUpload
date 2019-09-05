@@ -7,6 +7,8 @@ import { FileManagerComponent } from './components/file-manager/file-manager.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileListComponent } from "./components/fileList/file-list.components";
 import { FileSizePipe } from "./shared/fileSizePipe .pipe";
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FileSizePipe } from "./shared/fileSizePipe .pipe";
   imports: [
     BrowserModule,
     HttpClientModule,
+    VirtualScrollerModule,
+    FormsModule,
     NgbModule.forRoot()
   ],
   providers: [],
