@@ -1,0 +1,8 @@
+  <!-- <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="button upload" (click)="inputFile.click()">Upload File</button> -->
+
+  <div class="row" style="margin-bottom:15px;">
+    <div class="col-md-3">
+      <input type="file" #file placeholder="Choose file" (change)="upload($event)" #inputFile hidden>
+      <button type="button" class="btn btn-success" (click)="inputFile.click()">Upload File</button>
+    </div>
+  </div>
