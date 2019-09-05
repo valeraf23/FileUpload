@@ -6,25 +6,26 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 
 @Component({
   selector: 'app-upload',
-  templateUrl: 'upload.component.html'
+  templateUrl: 'upload.component.html',
+  styles: [`button {margin:1%}`]
 })
 
 export class UploadComponent {
   @Input() public disabled: boolean;
-  @Output() public uploadStatus: EventEmitter<ProgressStatus>;
-  @ViewChild('inputFile', { static: false }) inputFile: ElementRef;
+  @Output() public uploadStatus: EventEmitter<ProgressStatus> = new EventEmitter<ProgressStatus>();
+  @ViewChild('inputFile', { static: false }) private inputFile: ElementRef;
 
-  constructor(private service: FileUploadService) {
-    this.uploadStatus = new EventEmitter<ProgressStatus>();
+  constructor(private fileUploadService: FileUploadService) {
   }
 
   public upload(event) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       this.uploadStatus.emit({ status: ProgressStatusEnum.START });
-      this.service.uploadFile(file).subscribe(
+      this.fileUploadService.uploadFile(file).subscribe(
         data => {
           if (data) {
+            debugger;
             switch (data.type) {
               case HttpEventType.UploadProgress:
                 this.uploadStatus.emit( {status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100)});

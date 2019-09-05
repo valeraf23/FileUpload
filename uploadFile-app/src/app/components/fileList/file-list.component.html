@@ -4,11 +4,11 @@
     <th scope="col">File Name</th>
     <th scope="col">File Size</th>
     <th scope="col">File Type</th>
-    <th scope="col">File Modified Date</th>
+    <th scope="col">Upload date</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let file of files">
+  <tr *ngFor="let file of fileModels">
     <td>{{file.name}}</td>
     <td>{{file.size | fileSize}}</td>
     <td>{{file.type}}</td>

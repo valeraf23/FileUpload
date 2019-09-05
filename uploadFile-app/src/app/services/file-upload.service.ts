@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpProgressEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FileModel } from "../models/file-model";
@@ -16,10 +16,11 @@ export class FileUploadService {
       .pipe(catchError(this.handleError));;
   }
 
-  uploadFile(file: Blob): Observable<any> {
+  uploadFile(file: Blob): Observable<HttpEvent<HttpProgressEvent>> {
     const formData = new FormData();
+    debugger;
     formData.append('file', file);
-    return this.http.post<any>('api/upload',
+    return this.http.post<HttpProgressEvent>('api/upload',
       formData,
       {
         reportProgress: true,

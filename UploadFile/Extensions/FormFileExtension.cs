@@ -11,9 +11,9 @@ namespace UploadFile.Extensions
         {
             return new FileInfoModel
             {
-                Name = fileInfo.Name,
+                Name = fileInfo.FileName,
                 Size = fileInfo.Length,
-                Type = Path.GetExtension(fileInfo.Name),
+                Type = Path.GetExtension(fileInfo.FileName),
                 LastModifiedDate = DateTime.Now
             };
         }

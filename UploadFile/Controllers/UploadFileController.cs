@@ -22,10 +22,10 @@ namespace UploadFile.Controllers
 
         [HttpPost]
         [Route("upload")]
-        public async Task<IActionResult> Upload(IFormFile uploadedFile)
+        public async Task<IActionResult> Upload(IFormFile file)
         {
-            var file = uploadedFile.ConvertToFileInfoModel();
-            await _fileService.AddAsync(file);
+            var uploadFile = file.ConvertToFileInfoModel();
+            await _fileService.AddAsync(uploadFile);
             return Ok();
         }
 

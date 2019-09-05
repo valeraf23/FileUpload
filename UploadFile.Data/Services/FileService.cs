@@ -12,7 +12,7 @@ namespace UploadFile.Data.Services
     {
         protected readonly IRepository Repository;
 
-        protected FileService(IRepository repository)
+        public FileService(IRepository repository)
         {
             Repository = repository ??
                          throw new ArgumentNullException(nameof(repository),

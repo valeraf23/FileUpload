@@ -31,7 +31,8 @@ namespace UploadFile
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FileUploadContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Local")));
+                options.UseSqlServer(Configuration.GetConnectionString("Local"),
+                    b => b.MigrationsAssembly("UploadFile"))); ;
 
             services.AddCors();
             services.AddMvc(
