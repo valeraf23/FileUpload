@@ -25,7 +25,6 @@ export class UploadComponent {
       debugger;
       this.service.uploadFile(file).subscribe(
         data => {
-          debugger;
           if (data) {
             switch (data.type) {
               case HttpEventType.UploadProgress:
