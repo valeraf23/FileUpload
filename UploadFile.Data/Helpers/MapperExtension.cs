@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using UploadFile.Data.Models;
 using UploadFile.Domain.Entities;
-using UploadFile.Domain.Models;
 
 namespace UploadFile.Data.Helpers
 {

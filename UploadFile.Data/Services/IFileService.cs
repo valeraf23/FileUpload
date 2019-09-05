@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using UploadFile.Domain.Entities;
-using UploadFile.Domain.Models;
+using UploadFile.Data.Models;
 
 namespace UploadFile.Data.Services
 {

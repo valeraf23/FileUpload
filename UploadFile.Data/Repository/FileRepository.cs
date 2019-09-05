@@ -16,6 +16,11 @@ namespace UploadFile.Data.Repository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         public async Task<IEnumerable<FileInfoEntity>> GetFilesAsync()
         {
@@ -24,23 +29,14 @@ namespace UploadFile.Data.Repository
 
         public async Task<bool> SaveAsync()
         {
-            return (await _context.SaveChangesAsync() > 0);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Add(FileInfoEntity fileToAdd)
         {
-            if (fileToAdd == null)
-            {
-                throw new ArgumentNullException(nameof(fileToAdd));
-            }
+            if (fileToAdd == null) throw new ArgumentNullException(nameof(fileToAdd));
 
             _context.Add(fileToAdd);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -50,6 +46,5 @@ namespace UploadFile.Data.Repository
             _context.Dispose();
             _context = null;
         }
-
     }
 }

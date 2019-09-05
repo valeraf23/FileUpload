@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UploadFile.Data.Helpers;
+using UploadFile.Data.Models;
 using UploadFile.Data.Repository;
-using UploadFile.Domain.Entities;
-using UploadFile.Domain.Models;
 
 namespace UploadFile.Data.Services
 {
@@ -25,7 +23,6 @@ namespace UploadFile.Data.Services
         {
             var files = await Repository.GetFilesAsync();
             return files.Select(x => x.ToModel());
-
         }
 
         public async Task AddAsync(FileInfoModel entity)

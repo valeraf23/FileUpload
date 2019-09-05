@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using UploadFile.Domain.Entities;
 
-namespace UploadFile.Data.Data
+namespace UploadFile.Data.EntityTypeConfigurations
 {
     internal class FileInfoEntityTypeConfiguration : IEntityTypeConfiguration<FileInfoEntity>
     {

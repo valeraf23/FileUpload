@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.FileProviders;
-using UploadFile.Domain.Models;
+using UploadFile.Data.Models;
 
 namespace UploadFile.Extensions
 {

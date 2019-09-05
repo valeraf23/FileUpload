@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using UploadFile.Domain.Models;
+using UploadFile.Data.Models;
 
 namespace UploadFile.Data.ValidationRules
 {

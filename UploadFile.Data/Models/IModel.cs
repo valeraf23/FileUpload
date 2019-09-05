@@ -1,4 +1,4 @@
-﻿namespace UploadFile.Domain.Models
+﻿namespace UploadFile.Data.Models
 {
     public interface IModel
     {

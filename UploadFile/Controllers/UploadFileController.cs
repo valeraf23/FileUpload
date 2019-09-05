@@ -15,7 +15,6 @@ namespace UploadFile.Controllers
 
         public UploadFileController(IFileService fileService)
         {
-
             _fileService = fileService
                            ?? throw new ArgumentNullException(nameof(fileService));
             _fileService = fileService;
@@ -35,7 +34,6 @@ namespace UploadFile.Controllers
         {
             var result = await _fileService.GetFilesAsync();
             return Ok(result);
-
         }
     }
 }

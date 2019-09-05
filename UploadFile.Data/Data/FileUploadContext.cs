@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using UploadFile.Data.EntityTypeConfigurations;
 using UploadFile.Domain.Entities;
 
 namespace UploadFile.Data.Data
@@ -20,6 +18,5 @@ namespace UploadFile.Data.Data
             modelBuilder.ApplyConfiguration(new FileInfoEntityTypeConfiguration());
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }
