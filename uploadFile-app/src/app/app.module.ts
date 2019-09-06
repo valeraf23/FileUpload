@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UploadComponent } from './components/upload/upload.component';
-import { FileManagerComponent } from './components/file-manager/file-manager.component';
+import { FileAdminComponent } from './components/file-admin/file-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileListComponent } from "./components/fileList/file-list.components";
 import { FileSizePipe } from "./shared/fileSizePipe .pipe";
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    FileManagerComponent,
+    FileAdminComponent,
     UploadComponent,
     FileListComponent,
     FileSizePipe

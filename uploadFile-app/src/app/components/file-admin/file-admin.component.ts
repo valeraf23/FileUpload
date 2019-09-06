@@ -5,11 +5,11 @@ import { FileModel } from "../../models/file-model";
 
 
 @Component({
-  selector: 'app-filemanager',
-  templateUrl: './file-manager.component.html',
-  styleUrls: ['./file-manager.component.css']
+  selector: 'app-file-admin',
+  templateUrl: './file-admin.component.html',
+  styleUrls: ['./file-admin.component.css']
 })
-export class FileManagerComponent implements OnInit{
+export class FileAdminComponent implements OnInit{
 
   ngOnInit(): void { this.getFiles(); }
 
