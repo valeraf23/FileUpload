@@ -4,15 +4,16 @@
   margin-left: 15px;
   line-height: 36px;
 }
-h2 {
+h2,h3 {
   margin: 5px
 }
 
 .filter {
-  width: 100%;
-  font-size: 16px; 
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd; 
+  position: relative;
+  font-size: 16px;
+  padding: 12px 20px 12px 12px;
+  border: solid #ddd;
   margin-bottom: 12px;
+  margin-left: 5px;
 }
 
