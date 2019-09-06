@@ -15,8 +15,7 @@ namespace UploadFile.Controllers
 
         public UploadFileController(IFileService fileService)
         {
-            _fileService = fileService
-                           ?? throw new ArgumentNullException(nameof(fileService));
+            _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
             _fileService = fileService;
         }
 
@@ -24,9 +23,14 @@ namespace UploadFile.Controllers
         [Route("upload")]
         public async Task<IActionResult> Upload(IFormFile file)
         {
+            if (file == null)
+            {
+                return BadRequest();
+            }
+
             var uploadFile = file.ConvertToFileInfoModel();
             await _fileService.AddAsync(uploadFile);
-            return Ok();
+            return NoContent();
         }
 
         [HttpGet]
