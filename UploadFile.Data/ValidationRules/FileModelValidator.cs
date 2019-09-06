@@ -3,9 +3,9 @@ using UploadFile.Data.Models;
 
 namespace UploadFile.Data.ValidationRules
 {
-    public class FilelModelValidator : AbstractValidator<FileInfoModel>
+    public class FileModelValidator : AbstractValidator<FileInfoModel>
     {
-        public FilelModelValidator()
+        public FileModelValidator()
         {
             RuleFor(x => x.Name).Length(5, 50);
             RuleFor(x => x.LastModifiedDate).NotEmpty();

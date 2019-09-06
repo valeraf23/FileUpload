@@ -32,7 +32,7 @@ namespace UploadFile
         {
             services.AddDbContext<FileUploadContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Local"),
-                    b => b.MigrationsAssembly("UploadFile"))); ;
+                    b => b.MigrationsAssembly("UploadFile")));
 
             services.AddCors();
             services.AddMvc(
@@ -44,7 +44,7 @@ namespace UploadFile
                     options.SerializerSettings.Formatting = Formatting.Indented;
                     options.SerializerSettings.ContractResolver =
                         new CamelCasePropertyNamesContractResolver();
-                }).AddFluentValidation(fv => { fv.RegisterValidatorsFromAssemblyContaining<FilelModelValidator>(); });
+                }).AddFluentValidation(fv => { fv.RegisterValidatorsFromAssemblyContaining<FileModelValidator>(); });
             services.AddScoped<IRepository, FileRepository>();
             services.AddScoped<IFileService, FileService>();
         }
@@ -53,8 +53,11 @@ namespace UploadFile
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+            }
             else
+            {
                 app.UseExceptionHandler(appBuilder =>
                 {
                     appBuilder.Run(async context =>
@@ -72,6 +75,7 @@ namespace UploadFile
                         await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
                     });
                 });
+            }
 
             app.UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
             app.UseHttpsRedirection();

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using UploadFile.Data.Data;
 using UploadFile.Domain.Entities;
 
@@ -34,15 +34,26 @@ namespace UploadFile.Data.Repository
 
         public void Add(FileInfoEntity fileToAdd)
         {
-            if (fileToAdd == null) throw new ArgumentNullException(nameof(fileToAdd));
+            if (fileToAdd == null)
+            {
+                throw new ArgumentNullException(nameof(fileToAdd));
+            }
 
             _context.Add(fileToAdd);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposing) return;
-            if (_context == null) return;
+            if (!disposing)
+            {
+                return;
+            }
+
+            if (_context == null)
+            {
+                return;
+            }
+
             _context.Dispose();
             _context = null;
         }
